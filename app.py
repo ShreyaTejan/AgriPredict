@@ -3,7 +3,6 @@ import numpy as np
 import pickle
 import sklearn
 import os
-
 # Load the model and scalers
 def load_models():
     try:
@@ -17,21 +16,16 @@ def load_models():
     except Exception as e:
         print(f"Error loading model or scalers: {e}")
         return None, None, None
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Required for flashing messages
-
 # Load models at startup
 model, sc, mx = load_models()
-
 @app.route('/')
 def index():
     return render_template("index.html")
-
 @app.route('/home')
 def home():
     return render_template("home.html")
-
 def validate_input(value, field_name, min_val, max_val):
     try:
         value = float(value)
@@ -40,7 +34,6 @@ def validate_input(value, field_name, min_val, max_val):
         return value
     except ValueError as e:
         raise ValueError(f"Invalid {field_name}: {str(e)}")
-
 @app.route("/predict", methods=['POST'])
 def predict():
     # Add print statements for debugging
