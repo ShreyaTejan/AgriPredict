@@ -124,6 +124,7 @@
         background-color: var(--background-light);
         color: var(--text-dark);
         line-height: 1.6;
+        scroll-behavior: smooth;
       }
 
       /* Navigation */
@@ -1023,11 +1024,11 @@
         <span>Agri<span class="predict">Predict</span></span>
       </div>
       <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">How It Works</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how_it_works">How It Works</a></li>
+        <li><a href="/resources">Resources</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
       <a href="/signup" class="nav-button" role="button">
         Sign Up <span class="icon">→</span>
@@ -1048,7 +1049,7 @@
     </section>
 
     <!-- Key Features -->
-    <section class="container">
+    <section class="container" id="features">
       <div class="header">
         <h1 class="header-title">Why We Are</h1>
         <p class="header-description">
@@ -1162,17 +1163,18 @@
               fill="none"
             />
           </svg>
-          <h3 class="feature-title">Decrease Carbon</h3>
+          <h3 class="feature-title"  >Decrease Carbon</h3>
           <p class="feature-description">
             We create a sustainable future while reducing landfill pollution and
             carbon emissions.
           </p>
+          <p id="how_it_works"></p>
         </div>
       </div>
     </section>
 
     <!-- How It Works Section -->
-    <section class="section how-it-works">
+    <section class="section how-it-works" >
       <div class="process-container">
         <!-- Left side with title and illustration -->
         <div class="process-intro">

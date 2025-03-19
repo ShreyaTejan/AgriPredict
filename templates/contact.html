@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        color: white;
+        background-image: url("../static/contact.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../static/contact.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px); /* Adjust blur amount as needed */
+        z-index: -1; /* Place behind all content */
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 90vh; /* Contains everything within 90% of viewport height */
+        position: relative; /* Ensure it sits above the blurred background */
+        z-index: 1;
+      }
+
+      .left-content {
+        flex: 1.2;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .contact-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+      }
+
+      .main-title {
+        font-size: 3.2rem;
+        font-weight: bold;
+        margin-bottom: 25px;
+        line-height: 1.1;
+      }
+
+      .gradient-text {
+        background: linear-gradient(
+          90deg,
+          #ff6b6b 0%,
+          #c471ed 50%,
+          #705ef5 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .info-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 12px 15px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .icon-box {
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .info-text {
+        font-size: 1rem;
+        color: #ffffff;
+      }
+
+      .info-sections {
+        display: flex;
+        gap: 20px;
+        margin-top: 25px;
+      }
+
+      .info-section {
+        max-width: 200px;
+      }
+
+      .info-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+
+      .info-section p {
+        color: #e0e0e0;
+        line-height: 1.4;
+        font-size: 0.9rem;
+      }
+
+      .form-container {
+        flex: 0.8;
+        min-width: 300px;
+        max-width: 450px;
+        background: rgba(23, 24, 25, 0.5);
+        backdrop-filter: blur(8px);
+        padding: 25px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        height: auto;
+        max-height: 90vh;
+      }
+
+      .form-title {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+      }
+
+      .form-subtitle {
+        color: #e0e0e0;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 25px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+      }
+
+      textarea {
+        border-radius: 12px;
+        min-height: 100px;
+        max-height: 120px;
+        resize: none;
+      }
+
+      .submit-btn {
+        background-color: #4169e1;
+        color: white;
+        font-size: 0.95rem;
+        padding: 10px 25px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        float: right;
+        transition: background-color 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: #3151b2;
+      }
+
+      @media (max-width: 960px) {
+        .container {
+          gap: 20px;
+        }
+
+        .main-title {
+          font-size: 2.5rem;
+        }
+
+        .info-sections {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          height: auto;
+          overflow: auto;
+        }
+
+        .container {
+          flex-direction: column;
+          height: auto;
+          padding: 30px 20px;
+        }
+
+        .left-content,
+        .form-container {
+          max-width: 100%;
+        }
+
+        .main-title {
+          font-size: 2.2rem;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-content">
+        <div class="contact-title">Contact Us</div>
+        <h1 class="main-title">
+          Get in Touch:
+          <span class="gradient-text">We're Here to Answer Your Questions</span>
+        </h1>
+
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="icon-box">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </div>
+            <div class="info-text">support@lorem.com</div>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-box">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+            </div>
+            <div class="info-text">+91-1012023031</div>
+          </div>
+        </div>
+
+        <div class="info-sections">
+          <div class="info-section">
+            <h3>Customer Support</h3>
+            <p>
+              Our support team is available around the clock to help you with
+              any queries
+            </p>
+          </div>
+
+          <div class="info-section">
+            <h3>Feedback and Suggestions</h3>
+            <p>
+              We value your important feedbacks and are continuously working
+              towards improving ourselves to help you better.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <h2 class="form-title">Get in Touch</h2>
+        <p class="form-subtitle">You can reach us anytime</p>
+
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" placeholder="First Name" />
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Last Name" />
+            </div>
+          </div>
+
+          <input type="email" placeholder="Email" />
+          <input type="tel" placeholder="Phone no" />
+          <textarea placeholder="Your Message"></textarea>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

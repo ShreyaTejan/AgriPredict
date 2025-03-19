@@ -34,6 +34,12 @@ def signup():
 @app.route('/login')
 def login():
     return render_template("login.html")
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+
+
 def validate_input(value, field_name, min_val, max_val):
     try:
         value = float(value)
