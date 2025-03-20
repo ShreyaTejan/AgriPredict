@@ -1,122 +1,587 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AgriPredict</title>
-	<link rel="shortcut icon" type="image/png" style="height: 70px;" href="/static/logo.png">
-	<link rel="stylesheet" href="/static/home.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdn.tailwindcss.com"></script>
-	<style>
-		:root {
-		  --primary-color: rgb(21, 31, 20); /* Dark green from image */
-		  --accent-color: #4caf50; /* Lighter green for accents */
-		  --text-light: #f5f5f5;
-		  --text-dark: #333333;
-		  --background-light: #ffffff;
-		  --overlay-dark: rgba(10, 31, 10, 0.8);
-		}</style>
-  </head>
-  
-  <body>
-  <!--=======================navbar=====================================================-->
- 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgriPredict</title>
+  <link rel="shortcut icon" type="image/png" href="/static/logo.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary-color: #151F14;
+      --accent-color: #4caf50;
+      --accent-hover: #3d8b40;
+      --text-light: #f5f5f5;
+      --text-dark: #333333;
+      --background-light: #ffffff;
+      --overlay-dark: rgba(10, 31, 10, 0.85);
+      --form-bg: rgba(255, 255, 255, 0.95);
+    }
+    
+    /* Global Styles */
+    body {
+      background-image: url(/static/home.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-light);
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+      padding: 0.8rem 2rem;
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+    }
 
-<!-- HTML -->
-<nav class="bg-[#151F14] fixed top-0 left-0 right-0 z-1000 shadow-md px-10 py-[35px] flex justify-between items-center mb-[80px]">
-	<div class="logo flex items-center">
-	  <img src="../static/logo.png" alt="Logo" class="h-12 mr-2" />
-	  <span class="text-lg font-bold text-[#f5f5f5]">Agri<span class="text-[#4caf50;]">Predict</span></span>
-	</div>
-	<ul class="nav-links flex list-none text-[#f5f5f5]">
-	  <li class="ml-14">
-		<a href="/" class="text-text-light hover:text-[#4caf50;] transition-colors duration-300">Home</a>
-	  </li>
-	  <li class="ml-14">
-		<a href="#features" class="text-text-light hover:text-[#4caf50;] transition-colors duration-300">Features</a>
-	  </li>
-	  <li class="ml-14">
-		<a href="#how_it_works" class="text-text-light hover:text-[#4caf50;] transition-colors duration-300">How It Works</a>
-	  </li>
-	  <li class="ml-14">
-		<a href="/resources" class="text-text-light hover:text-[#4caf50;] transition-colors duration-300">Resources</a>
-	  </li>
-	  <li class="ml-14">
-		<a href="/contact" class="text-text-light hover:text-[#4caf50;] transition-colors duration-300">Contact</a>
-	  </li>
-	</ul>
-	<a href="/signup" class="bg-transparent text-[#4caf50;] border-2 border-[#4caf50;] px-6 py-2 rounded-full font-bold hover:bg-[#4caf50;] hover:text-white transition-colors duration-300">
-	  Sign Up <span class="icon">→</span>
-	</a>
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar-brand img {
+      height: 45px;
+      transition: transform 0.3s ease;
+    }
+    
+    .navbar-brand:hover img {
+      transform: scale(1.05);
+    }
+    
+    .brand-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-left: 10px;
+      color: var(--text-light);
+    }
+    
+    .brand-accent {
+      color: var(--accent-color);
+    }
+    
+    .navbar-nav .nav-link {
+      color: var(--text-light);
+      font-weight: 500;
+      margin: 0 0.5rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      color: var(--accent-color);
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .signup-btn {
+      background-color: transparent;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 50px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .signup-btn:hover {
+      background-color: var(--accent-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    /* Main Content */
+    .main-container {
+      background-color: var(--overlay-dark);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .page-heading {
+      font-size: 2.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-light);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .accent-text {
+      color: var(--accent-color);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Form Styling */
+    .form-section {
+      background-color: var(--form-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+
+    .form-section h3 {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.4rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 10px;
+    }
+    
+    .form-label {
+      color: var(--text-dark);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .input-group-text {
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      color: #666;
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+    }
+    
+    .form-text {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+    
+    /* Submit Button */
+    .submit-btn {
+      background-color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      display: inline-block;
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+    }
+    
+    .submit-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(76, 175, 80, 0.4);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-bottom: 2rem;
+    }
+    
+    .progress {
+      height: 0.5rem;
+      border-radius: 1rem;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .progress-bar {
+      background-color: var(--accent-color);
+      border-radius: 1rem;
+    }
+    
+    /* Result Card */
+    .result-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin: 2rem auto;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .result-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .result-img {
+      height: 150px;
+      object-fit: contain;
+      margin: 1.5rem auto 0;
+    }
+    
+    .result-body {
+      padding: 1.5rem;
+      width: 100%;
+    }
+    
+    .result-text {
+      color: var(--text-dark);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .result-info {
+      color: #666;
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .result-action {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .page-heading {
+        font-size: 2.5rem;
+      }
+      
+      .navbar {
+        padding: 0.6rem 1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .page-heading {
+        font-size: 2.2rem;
+      }
+      
+      .main-container {
+        padding: 1.5rem;
+      }
+      
+      .form-section {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .page-heading {
+        font-size: 1.8rem;
+      }
+      
+      .brand-text {
+        font-size: 1.2rem;
+      }
+      
+      .navbar-brand img {
+        height: 35px;
+      }
+      
+      .form-label {
+        font-size: 0.9rem;
+      }
+      
+      .submit-btn {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+      }
+    }
+    
+    /* Tooltip styling */
+    .tooltip-inner {
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      max-width: 250px;
+    }
+    
+    .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before, 
+    .bs-tooltip-top .tooltip-arrow::before {
+      border-top-color: var(--primary-color);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="../static/logo.png" alt="AgriPredict Logo">
+        <span class="brand-text">Agri<span class="brand-accent">Predict</span></span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars" style="color: var(--text-light);"></i>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-4">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/soil-analysis">Soil Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/resources">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+        </ul>
+        <a href="/signup" class="btn signup-btn">
+          Sign Up <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
   </nav>
-  
-<!--==========================================================================================-->
-  <div class="container my-3">
-      <h1 class="heading mt-24">Predict Your Crop<span class="text-success">🌱</span></h1>
 
-<!--      adding form-->
-      <form action="/predict" method="POST">
-          <div class="row">
-              <div class="col-md-4">
-					<label for="Nitrogen">Nitrogen</label>
-					<input type="number" id="Nitrogen" name="Nitrogen" placeholder="Enter % of Nitrogen" class="form-control" required step="0">
-				</div>
-               <div class="col-md-4">
-					<label for="Phosporus">Phosphorus</label>
-					<input type="number" id="Phosporus" name="Phosporus" placeholder="Enter % of Phosphorus" class="form-control" required step="00">
-				</div>
-				<div class="col-md-4">
-					<label for="Potassium">Potassium</label>
-					<input type="number" id="Potassium" name="Potassium" placeholder="Enter % of Potassium" class="form-control" required step="0">
-				</div>
+  <div class="container main-container">
+    <h1 class="page-heading">Predict Your Ideal <span class="accent-text">Crop 🌱</span></h1>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="d-flex justify-content-between mt-2">
+        <small>Enter Data</small>
+        <small>Processing</small>
+        <small>Results</small>
+      </div>
+    </div>
+
+    <!-- Prediction Form -->
+    <form id="predictionForm" action="/predict" method="POST">
+      <!-- Soil Nutrients Section -->
+      <div class="form-section">
+        <h3>Soil Nutrients</h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="Nitrogen" class="form-label">Nitrogen</label>
+            <div class="input-group">
+              <input type="number" id="Nitrogen" name="Nitrogen" placeholder="Enter amount" class="form-control" min="0" max="150" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 0-140 kg/ha">
+              <span class="input-group-text">kg/ha</span>
+            </div>
+            <div class="form-text">Typical range: 0-140 kg/ha</div>
           </div>
-
-          <div class="row mt-4">
-				<div class="col-md-4">
-					<label for="Temperature">Temperature</label>
-					<input type="number" step="0.01" id="Temperature" name="Temperature" placeholder="Enter Temperature in °C" class="form-control" required step="0">
-				</div>
-				<div class="col-md-4">
-					<label for="Humidity">Humidity</label>
-					<input type="number" step="0.01" id="Humidity" name="Humidity" placeholder="Enter Humidity in %" class="form-control" required step="0">
-				</div>
-				<div class="col-md-4">
-					<label for="pH">pH</label>
-					<input type="number" step="0.01" id="pH" name="pH" placeholder="Enter pH value" class="form-control" required step="0">
-				</div>
-			</div>
-
-          <div class="row mt-4">
-				<div class="col-md-4">
-					<label for="Rainfall">Rainfall</label>
-					<input type="number" step="0.01" id="Rainfall" name="Rainfall" placeholder="Enter Rainfall in mm" class="form-control" required>
-				</div>
-			</div>
-
-			<div class="row mt-4">
-
-				<div class="col-md-12 text-center">
-					 <button type="submit" class="btn btn-success btn-lg">Get Recommendation</button>
-					 {% if result %}
-						<div class="card bg-white ml-[500px]" style="width: 28rem;">
-						<img src="{{url_for('static', filename='crop.png')}}" style="height: 150px; width: 120px;" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text" style="margin-top: -20px;">{{ result }} </p>
-						</div>
-						</div>
-					{% endif %}
-				 </div>
-				 </div>
-      </form>
+          
+          <div class="col-md-4 mb-3">
+            <label for="Phosporus" class="form-label">Phosphorus</label>
+            <div class="input-group">
+              <input type="number" id="Phosporus" name="Phosporus" placeholder="Enter amount" class="form-control" min="0" max="150" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 0-140 kg/ha">
+              <span class="input-group-text">kg/ha</span>
+            </div>
+            <div class="form-text">Typical range: 0-140 kg/ha</div>
+          </div>
+          
+          <div class="col-md-4 mb-3">
+            <label for="Potassium" class="form-label">Potassium</label>
+            <div class="input-group">
+              <input type="number" id="Potassium" name="Potassium" placeholder="Enter amount" class="form-control" min="0" max="210" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 0-200 kg/ha">
+              <span class="input-group-text">kg/ha</span>
+            </div>
+            <div class="form-text">Typical range: 0-200 kg/ha</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Climate Conditions Section -->
+      <div class="form-section">
+        <h3>Climate Conditions</h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="Temperature" class="form-label">Temperature</label>
+            <div class="input-group">
+              <input type="number" step="0.1" id="Temperature" name="Temperature" placeholder="Enter value" class="form-control" min="-10" max="60" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 5-45°C">
+              <span class="input-group-text">°C</span>
+            </div>
+            <div class="form-text">Typical range: 5-45°C</div>
+          </div>
+          
+          <div class="col-md-4 mb-3">
+            <label for="Humidity" class="form-label">Humidity</label>
+            <div class="input-group">
+              <input type="number" step="0.1" id="Humidity" name="Humidity" placeholder="Enter value" class="form-control" min="0" max="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 20-100%">
+              <span class="input-group-text">%</span>
+            </div>
+            <div class="form-text">Typical range: 20-100%</div>
+          </div>
+          
+          <div class="col-md-4 mb-3">
+            <label for="Rainfall" class="form-label">Rainfall</label>
+            <div class="input-group">
+              <input type="number" step="0.1" id="Rainfall" name="Rainfall" placeholder="Enter amount" class="form-control" min="0" max="4000" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 50-3000mm">
+              <span class="input-group-text">mm</span>
+            </div>
+            <div class="form-text">Typical range: 50-3000mm</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Soil Properties Section -->
+      <div class="form-section">
+        <h3>Soil Properties</h3>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="pH" class="form-label">Soil pH</label>
+            <input type="number" step="0.1" id="pH" name="pH" placeholder="Enter pH value (0-14)" class="form-control" min="0" max="14" required data-bs-toggle="tooltip" data-bs-placement="top" title="Common range: 4.0-9.0">
+            <div class="form-text">Typical range: 4.0-9.0</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Submit Button -->
+      <div class="text-center mt-4">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Get Crop Recommendation <i class="fas fa-seedling ms-2"></i>
+        </button>
+      </div>
+    </form>
+    
+    <!-- Result Card (Hidden initially) -->
+    <div class="result-card" id="resultCard">
+      <img src="/static/crop.png" class="result-img" alt="Recommended Crop">
+      <div class="result-body">
+        <h3 class="result-text">Your recommended crop is: <span id="cropName">Rice</span></h3>
+        <p class="result-info">Based on your soil and climate data, this crop has the highest probability of success.</p>
+        <div class="result-action">
+          <a href="/crop-details" class="btn submit-btn btn-sm">
+            Learn more about this crop <i class="fas fa-info-circle ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-		document.getElementsByClassName("btn").addEventListener("click", function() {
-  		document.querySelector(".card").style.display = "block";
-		});
-	</script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  
+  <script>
+    // Initialize tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    
+    // Form validation
+    const form = document.getElementById('predictionForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const progressBar = document.querySelector('.progress-bar');
+    const resultCard = document.getElementById('resultCard');
+    
+    // Check if result should be shown (for when the page loads after a form submission)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('result')) {
+      showResult(urlParams.get('result'));
+    }
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      if (!form.checkValidity()) {
+        event.stopPropagation();
+        form.classList.add('was-validated');
+        return;
+      }
+      
+      // Update progress bar
+      progressBar.style.width = '50%';
+      progressBar.setAttribute('aria-valuenow', '50');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+      
+      // Simulate API call (would be replaced with actual form submission)
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+        progressBar.setAttribute('aria-valuenow', '100');
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        // In a real app, you would send this data to your backend
+        // For demo purposes, we'll just show a result
+        showResult('Rice');
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Get Crop Recommendation <i class="fas fa-seedling ms-2"></i>';
+      }, 1500);
+    });
+    
+    function showResult(cropName) {
+      document.getElementById('cropName').textContent = cropName;
+      resultCard.classList.add('show');
+      resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // Input validation
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+      input.addEventListener('input', function() {
+        if (this.value !== '') {
+          const min = parseFloat(this.min);
+          const max = parseFloat(this.max);
+          const value = parseFloat(this.value);
+          
+          if (value < min) {
+            this.setCustomValidity(`Value should be at least ${min}`);
+          } else if (value > max) {
+            this.setCustomValidity(`Value should not exceed ${max}`);
+          } else {
+            this.setCustomValidity('');
+          }
+        }
+      });
+    });
+  </script>
+</body>
 </html>

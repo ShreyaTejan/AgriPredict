@@ -23,7 +23,7 @@ model, sc, mx = load_models()
 @app.route('/')
 def index():
     return render_template("index.html")
-@app.route('/home')
+@app.route('/soil-analysis')
 def home():
     return render_template("home.html")
 
@@ -38,6 +38,10 @@ def login():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
+
+@app.route('/resources')
+def resources():
+    return render_template("resources.html")
 
 
 def validate_input(value, field_name, min_val, max_val):
