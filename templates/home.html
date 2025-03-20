@@ -32,81 +32,104 @@
     }
     
     /* Navigation Bar */
-    .navbar {
-      background-color: var(--primary-color);
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-      padding: 0.8rem 2rem;
-      backdrop-filter: blur(5px);
-      z-index: 1000;
-    }
+    :root {
+    --primary-color: #0F1C0D;
+    --accent-color: #4caf50;
+    --accent-hover: #3d8b40;
+    --text-light: #f5f5f5;
+    --text-dark: #333333;
+  }
+  
+  .navbar {
+    background-color: var(--primary-color);
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-brand img {
+    height: 40px;
+  }
+  
+  .brand-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-left: 8px;
+    color: #ffffff;
+  }
+  
+  .brand-accent {
+    color: var(--accent-color);
+  }
+  
 
-    .navbar-brand {
-      display: flex;
-      align-items: center;
+  .navbar-nav {
+  margin-left: auto;
+  margin-right: auto;
+  gap: 2rem;;
+
+}
+  
+  .navbar-nav .nav-link {
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    transition: color 0.3s;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: var(--accent-color);
+  }
+
+  .nav-link.active {
+    color: var(--text-light);
+    font-weight: normal;
+  }
+  
+  .signup-btn {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 50px;
+    padding: 0.4rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  
+  .signup-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      background-color: var(--primary-color);
+      padding: 1rem;
+      border-radius: 0 0 10px 10px;
+      margin-top: 0.5rem;
     }
     
-    .navbar-brand img {
-      height: 45px;
-      transition: transform 0.3s ease;
-    }
-    
-    .navbar-brand:hover img {
-      transform: scale(1.05);
-    }
-    
-    .brand-text {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-left: 10px;
-      color: var(--text-light);
-    }
-    
-    .brand-accent {
-      color: var(--accent-color);
+    .navbar-nav {
+      margin-right: 0;
+      margin-bottom: 1rem;
     }
     
     .navbar-nav .nav-link {
-      color: var(--text-light);
-      font-weight: 500;
-      margin: 0 0.5rem;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    
-    .navbar-nav .nav-link:hover {
-      color: var(--accent-color);
-    }
-    
-    .navbar-nav .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background-color: var(--accent-color);
-      transition: width 0.3s ease;
-    }
-    
-    .navbar-nav .nav-link:hover::after {
-      width: 100%;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .signup-btn {
-      background-color: transparent;
-      color: var(--accent-color);
-      border: 2px solid var(--accent-color);
-      border-radius: 50px;
-      padding: 0.5rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
     }
-    
-    .signup-btn:hover {
-      background-color: var(--accent-color);
-      color: white;
-      transform: translateY(-2px);
-    }
+  }
     
     /* Main Content */
     .main-container {
@@ -364,7 +387,7 @@
       </button>
       
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto me-4">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
@@ -382,12 +405,11 @@
           </li>
         </ul>
         <a href="/signup" class="btn signup-btn">
-          Sign Up <i class="fas fa-arrow-right ms-1"></i>
+          Sign Up →
         </a>
       </div>
     </div>
   </nav>
-
   <div class="container main-container">
     <h1 class="page-heading">Predict Your Ideal <span class="accent-text">Crop 🌱</span></h1>
     
