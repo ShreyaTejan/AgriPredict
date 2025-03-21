@@ -1,8 +1,10 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, jsonify
 import numpy as np
 import pickle
 import sklearn
 import os
+from flask_cors import CORS
+
 # Load the model and scalers
 def load_models():
     try:
@@ -16,33 +18,52 @@ def load_models():
     except Exception as e:
         print(f"Error loading model or scalers: {e}")
         return None, None, None
+
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for flashing messages
+CORS(app)  # Enable CORS for all routes
+app.secret_key = 'your_secret_key'  # Required for sessions if needed
+
 # Load models at startup
 model, sc, mx = load_models()
-@app.route('/')
+
+@app.route('/api/')
 def index():
-    return render_template("index.html")
-@app.route('/soil-analysis')
+    return jsonify({"message": "Welcome to the Crop Recommendation API"})
+
+@app.route('/api/soil-analysis')
 def home():
-    return render_template("home.html")
+    return jsonify({"message": "Soil Analysis Service"})
 
-@app.route('/signup')
+@app.route('/api/signup', methods=['POST'])
 def signup():
-    return render_template("signup.html")
+    # This would typically handle user registration logic
+    data = request.json
+    # Process signup data here
+    return jsonify({"success": True, "message": "User registered successfully"})
 
-@app.route('/login')
+@app.route('/api/login', methods=['POST'])
 def login():
-    return render_template("login.html")
+    # This would typically handle authentication logic
+    data = request.json
+    # Process login data here
+    return jsonify({"success": True, "message": "Login successful"})
 
-@app.route('/contact')
+@app.route('/api/contact', methods=['POST'])
 def contact():
-    return render_template("contact.html")
+    # Handle contact form submission
+    data = request.json
+    # Process contact data here
+    return jsonify({"success": True, "message": "Message sent successfully"})
 
-@app.route('/resources')
+@app.route('/api/resources')
 def resources():
-    return render_template("resources.html")
-
+    # Return list of resources
+    resources_data = [
+        {"title": "Crop Guide", "description": "Guide for growing various crops"},
+        {"title": "Soil Health", "description": "Information about maintaining soil health"},
+        # Add more resources as needed
+    ]
+    return jsonify({"resources": resources_data})
 
 def validate_input(value, field_name, min_val, max_val):
     try:
@@ -52,38 +73,32 @@ def validate_input(value, field_name, min_val, max_val):
         return value
     except ValueError as e:
         raise ValueError(f"Invalid {field_name}: {str(e)}")
-@app.route("/predict", methods=['POST'])
+
+@app.route("/api/predict", methods=['POST'])
 def predict():
-    # Add print statements for debugging
-    print("Form Data:", request.form)
+    # For React, we'll receive JSON data instead of form data
+    data = request.json
+    print("JSON Data:", data)
     
     try:
         # Validate and convert inputs
-        N = float(request.form.get('Nitrogen', 0))
-        P = float(request.form.get('Phosphorus', 0))
-        K = float(request.form.get('Potassium', 0))
-        temp = float(request.form.get('Temperature', 0))
-        humidity = float(request.form.get('Humidity', 0))
-        ph = float(request.form.get('pH', 0))
-        rainfall = float(request.form.get('Rainfall', 0))
+        N = float(data.get('Nitrogen', 0))
+        P = float(data.get('Phosphorus', 0))
+        K = float(data.get('Potassium', 0))
+        temp = float(data.get('Temperature', 0))
+        humidity = float(data.get('Humidity', 0))
+        ph = float(data.get('pH', 0))
+        rainfall = float(data.get('Rainfall', 0))
         
         print("Processed inputs:", [N, P, K, temp, humidity, ph, rainfall])
         
         feature_list = [N, P, K, temp, humidity, ph, rainfall]
         single_pred = np.array(feature_list).reshape(1, -1)
         
-        # Print shapes for debugging
-        print("Input shape:", single_pred.shape)
-        
         # Scale and predict
         mx_features = mx.transform(single_pred)
-        print("MinMax scaled shape:", mx_features.shape)
-        
         sc_mx_features = sc.transform(mx_features)
-        print("Standard scaled shape:", sc_mx_features.shape)
-        
         prediction = model.predict(sc_mx_features)
-        print("Prediction:", prediction)
         
         crop_dict = {
             1: "Rice", 2: "Maize", 3: "Jute", 4: "Cotton", 5: "Coconut", 6: "Papaya", 7: "Orange",
@@ -96,9 +111,19 @@ def predict():
         result = f"{crop} is the best crop to be cultivated right there"
         print("Final result:", result)
         
-        return render_template('home.html', result=result)
+        return jsonify({
+            "success": True,
+            "prediction": int(prediction[0]),
+            "crop": crop,
+            "result": result
+        })
         
     except Exception as e:
         print("Error occurred:", str(e))
-        flash(f"An error occurred: {str(e)}")
-        return redirect(url_for('home'))
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 400
+
+if __name__ == '__main__':
+    app.run(debug=True)

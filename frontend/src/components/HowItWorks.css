@@ -1,0 +1,237 @@
+.how-it-works {
+    position: relative;
+    padding: 2rem 1%;
+    background-color: #f9fdfb;
+    overflow: hidden;
+  }
+
+  .section-title {
+    position: relative;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color: #333;
+    font-weight: 700;
+  }
+
+  .process-container {
+    display: flex;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Left side with title and illustration */
+  .process-intro {
+    width: 35%;
+    position: relative;
+    padding-right: 2rem;
+  }
+
+  .big-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #333;
+    line-height: 1;
+    margin-bottom: 2rem;
+  }
+
+  .process-illustration {
+    width: 280px;
+    height: 280px;
+    background-color: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .process-illustration img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* Right side with steps */
+  .process-steps {
+    width: 65%;
+    position: relative;
+    padding-top: 2rem;
+  }
+
+  /* Path */
+  .process-path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* Individual steps */
+  .process-step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-number {
+    width: 70px;
+    height: 70px;
+    background-color: #3cb371; /* Green color */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: 2rem;
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    flex-grow: 1;
+  }
+
+  .step-number-light {
+    width: 70px;
+    height: 70px;
+    background-color: #e8f5e9; /* Light green background */
+    color: #3cb371; /* Green text */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: 2rem;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 1.5rem;
+    color: #3cb371; /* Green text */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .step-description {
+    color: #555;
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+
+  .dashed-path {
+    position: absolute;
+    z-index: 0;
+    border: none;
+    border-left: 3px dashed #a5d6a7;
+    height: calc(100% - 30px);
+    left: 35px;
+    top: 60px;
+  }
+
+  /* Add animation for the path */
+  .curved-arrow-path path {
+    stroke-dashoffset: 1000;
+    animation: drawPath 2s forwards;
+  }
+
+  @keyframes drawPath {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .process-container {
+      flex-direction: column;
+    }
+
+    .process-intro,
+    .process-steps {
+      width: 100%;
+    }
+
+    .process-illustration {
+      width: 220px;
+      height: 220px;
+      margin: 2rem auto;
+    }
+
+    .big-title {
+      text-align: center;
+      font-size: 2.5rem;
+    }
+
+    .news-title{
+      text-align: center;
+      font-size: 2.5rem;
+    }
+
+    .dashed-path {
+      left: 35px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .process-step {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .step-number,
+    .step-number-light {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+
+    .dashed-path {
+      display: none;
+    }
+  }
+
+  /* Element hidden state */
+  .section-title.hidden,
+  .feature-card.hidden,
+  .step.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  /* Element visible state with animation */
+  .section-title.visible,
+  .feature-card.visible,
+  .step.visible {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  /* Staggered animation for feature cards */
+  .feature-card.visible {
+    animation-delay: calc(0.15s * var(--card-index, 0));
+  }
+
+  /* Staggered animation for steps */
+  .step.visible {
+    animation-delay: calc(0.2s * var(--step-index, 0));
+  }
+
+  /* Define the fadeInUp animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
