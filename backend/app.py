@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import numpy as np
 import pickle
 import sklearn
@@ -19,12 +19,23 @@ def load_models():
         print(f"Error loading model or scalers: {e}")
         return None, None, None
 
-app = Flask(__name__)
+# Initialize Flask app with static file configuration for React
+app = Flask(__name__, static_folder='../build', static_url_path='')
 CORS(app)  # Enable CORS for all routes
-app.secret_key = 'your_secret_key'  # Required for sessions if needed
+app.secret_key = os.environ.get('SECRET_KEY', 'default_dev_key')  # Use environment variable
 
 # Load models at startup
 model, sc, mx = load_models()
+
+# Serve React frontend
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Handle React routing
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/')
 def index():
@@ -126,4 +137,5 @@ def predict():
         }), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
