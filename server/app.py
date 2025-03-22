@@ -20,7 +20,7 @@ def load_models():
         return None, None, None
 
 # Initialize Flask app with static file configuration for React
-app = Flask(__name__, static_folder='../build', static_url_path='')
+app = Flask(__name__, static_folder='../client/build', static_url_path='')  # Correct static folder path
 CORS(app)  # Enable CORS for all routes
 app.secret_key = os.environ.get('SECRET_KEY', 'default_dev_key')  # Use environment variable
 
@@ -47,52 +47,31 @@ def home():
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
-    # This would typically handle user registration logic
     data = request.json
-    # Process signup data here
     return jsonify({"success": True, "message": "User registered successfully"})
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    # This would typically handle authentication logic
     data = request.json
-    # Process login data here
     return jsonify({"success": True, "message": "Login successful"})
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
-    # Handle contact form submission
     data = request.json
-    # Process contact data here
     return jsonify({"success": True, "message": "Message sent successfully"})
 
 @app.route('/api/resources')
 def resources():
-    # Return list of resources
     resources_data = [
         {"title": "Crop Guide", "description": "Guide for growing various crops"},
         {"title": "Soil Health", "description": "Information about maintaining soil health"},
-        # Add more resources as needed
     ]
     return jsonify({"resources": resources_data})
 
-def validate_input(value, field_name, min_val, max_val):
-    try:
-        value = float(value)
-        if not min_val <= value <= max_val:
-            raise ValueError(f"{field_name} must be between {min_val} and {max_val}")
-        return value
-    except ValueError as e:
-        raise ValueError(f"Invalid {field_name}: {str(e)}")
-
 @app.route("/api/predict", methods=['POST'])
 def predict():
-    # For React, we'll receive JSON data instead of form data
     data = request.json
-    print("JSON Data:", data)
-    
     try:
-        # Validate and convert inputs
         N = float(data.get('Nitrogen', 0))
         P = float(data.get('Phosphorus', 0))
         K = float(data.get('Potassium', 0))
@@ -101,12 +80,9 @@ def predict():
         ph = float(data.get('pH', 0))
         rainfall = float(data.get('Rainfall', 0))
         
-        print("Processed inputs:", [N, P, K, temp, humidity, ph, rainfall])
-        
         feature_list = [N, P, K, temp, humidity, ph, rainfall]
         single_pred = np.array(feature_list).reshape(1, -1)
         
-        # Scale and predict
         mx_features = mx.transform(single_pred)
         sc_mx_features = sc.transform(mx_features)
         prediction = model.predict(sc_mx_features)
@@ -120,7 +96,6 @@ def predict():
         
         crop = crop_dict.get(prediction[0], "Unknown crop")
         result = f"{crop} is the best crop to be cultivated right there"
-        print("Final result:", result)
         
         return jsonify({
             "success": True,
@@ -130,12 +105,11 @@ def predict():
         })
         
     except Exception as e:
-        print("Error occurred:", str(e))
         return jsonify({
             "success": False,
             "error": str(e)
         }), 400
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
