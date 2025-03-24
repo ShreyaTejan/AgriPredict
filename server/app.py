@@ -20,7 +20,7 @@ def load_models():
         return None, None, None
 
 # Initialize Flask app with static file configuration for React
-app = Flask(__name__, static_folder='../client/build', static_url_path='')  # Correct static folder path
+app = Flask(__name__, static_folder='../client/build', static_url_path='')
 CORS(app)  # Enable CORS for all routes
 app.secret_key = os.environ.get('SECRET_KEY', 'default_dev_key')  # Use environment variable
 
@@ -111,5 +111,5 @@ def predict():
         }), 400
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 5000))  # Render uses PORT from environment
     app.run(host='0.0.0.0', port=port)
