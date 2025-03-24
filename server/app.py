@@ -20,7 +20,7 @@ def load_models():
         return None, None, None
 
 # Initialize Flask app with static file configuration for React
-app = Flask(__name__, static_folder='../client/build', static_url_path='')
+app = Flask(__name__, static_folder='../client/dist', static_url_path='')
 CORS(app)  # Enable CORS for all routes
 app.secret_key = os.environ.get('SECRET_KEY', 'default_dev_key')  # Use environment variable
 
