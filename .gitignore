@@ -1,0 +1,12 @@
+# Python
+venv/
+server/venv/
+__pycache__/
+*.pyc
+
+# Node
+client/node_modules/
+
+# Env
+.env
+.flaskenv
